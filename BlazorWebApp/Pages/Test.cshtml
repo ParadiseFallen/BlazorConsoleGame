@@ -1,0 +1,25 @@
+﻿@page "/test/{id:int?}"
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>XX</title>
+</head>
+<body>
+    <div>
+        <h2>Test</h2>
+    </div>
+</body>
+</html>
+
+@functions{
+
+    public async Task OnGet()
+    {
+        var x = this.MetadataProvider;
+    }
+}

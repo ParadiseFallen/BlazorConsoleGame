@@ -1,0 +1,33 @@
+﻿@page "/"
+@page "/x"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+<p>@BlazorConsole.Text</p>
+<button @onclick=@(()=>{
+    Console.WriteLine("space");
+    BlazorConsole.Inputs.Enqueue("space");
+    })>space</button>
+<button @onclick=@(()=>BlazorConsole.Inputs.Enqueue("escape"))>escape</button>
+<button @onclick=@(()=>BlazorConsole.Inputs.Enqueue("enter"))>enter</button>
+@code {
+
+    public DateTime Time { get; set; }
+    public BlazorConsole BlazorConsole { get; set; } = new();
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return Task.CompletedTask;
+        var game = new Game(BlazorConsole);
+        BlazorConsole.StateChanged += StateHasChanged;
+        InvokeAsync(() => game.Run());
+        return Task.CompletedTask;
+    }
+
+}
